@@ -1,5 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_ctrip_project/dao/home_dart.dart';
+import 'package:flutter_ctrip_project/model/home_model.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -18,9 +22,40 @@ class _HomePageState extends State<HomePage> {
     'https://img2.baidu.com/it/u=3202947311,1179654885&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
   ];
   double appBarAlpha = 0;
+  String resultString = '';
   final PageController _controller = PageController(
     initialPage: 0,
   );
+
+  @override
+  void initState () {
+    super.initState();
+
+    loadData();
+  }
+
+  loadData() async {
+    // HomeDao.fetch().then((result) {
+    //   setState((){
+    //     resultString = json.encode(result);
+    //   });
+    // }).catchError((e){
+    //   setState((){
+    //     resultString = e.toString();
+    //   });
+    // });
+
+    try {
+      HomeModel model = await HomeDao.fetch();
+      setState(() {
+        resultString = json.encode(model.config);
+      });
+    } catch (e) {
+      setState(() {
+        resultString = e.toString();
+      });
+    }
+  }
 
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
@@ -87,11 +122,16 @@ class _HomePageState extends State<HomePage> {
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  // Container(
+                  //   height: 800,
+                  //   child: ListView(
+                  //     children: _buildList(),
+                  //   ),
+                  // )
+
                   Container(
-                    height: 800,
-                    child: ListView(
-                      children: _buildList(),
-                    ),
+                    // height: 800,
+                    child: Text(resultString)
                   )
                 ],
               ),

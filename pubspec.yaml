@@ -38,6 +38,8 @@ dependencies:
 #  flutter_swiper: ^1.1.6
   cached_network_image: ^3.0.0
   flutter_swiper_view: ^1.1.8
+  json_annotation: ^4.2.0
+  http: ^0.13.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
