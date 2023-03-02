@@ -4,7 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_ctrip_project/dao/home_dart.dart';
 import 'package:flutter_ctrip_project/model/home_model.dart';
+import 'package:flutter_ctrip_project/widget/grid_nav.dart';
+import 'package:flutter_ctrip_project/widget/local_nav.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
+import 'package:flutter_ctrip_project/model/common_model.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const CITY_NAMES = [ '北京', '上海', '广州', '深圳', '杭州', '苏州', '成都', '武汉', '郑州', '洛阳', '厦门', '青岛', '拉萨' ];
@@ -16,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+
   List _imageUrls = [
     'https://img2.baidu.com/it/u=3202947311,1179654885&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
     'https://img2.baidu.com/it/u=1301024532,2250161373&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500',
@@ -23,6 +27,8 @@ class _HomePageState extends State<HomePage> {
   ];
   double appBarAlpha = 0;
   String resultString = '';
+  List<CommonModel> localNavList = [];
+
   final PageController _controller = PageController(
     initialPage: 0,
   );
@@ -48,12 +54,10 @@ class _HomePageState extends State<HomePage> {
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        resultString = json.encode(model.config);
+        localNavList = model.localNavList!;
       });
     } catch (e) {
-      setState(() {
-        resultString = e.toString();
-      });
+      print(e);
     }
   }
 
@@ -95,6 +99,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement build
 
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
       body: Stack(children: [
         MediaQuery.removePadding(
             context: context,
@@ -122,6 +127,10 @@ class _HomePageState extends State<HomePage> {
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+                    child: LocalNav(localNavList: localNavList),
+                  ),
                   // Container(
                   //   height: 800,
                   //   child: ListView(
@@ -129,10 +138,14 @@ class _HomePageState extends State<HomePage> {
                   //   ),
                   // )
 
+
                   Container(
                     // height: 800,
-                    child: Text(resultString)
-                  )
+                    child: ListTile(
+                      title: Text(resultString),
+                    )
+                  ),
+                  GridNav(gridNavModel: null,name: 'jack1111')
                 ],
               ),
             )
