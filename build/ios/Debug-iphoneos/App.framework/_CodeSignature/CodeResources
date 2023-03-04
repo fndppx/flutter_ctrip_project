@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		BOBZtVCKogwuSluqb0miwcmwMmY=
+		WL0CZ67p6abDPmMqK/bFR+wurqA=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+		B6gEgVH6l3tbtVPlERg/E5dUpnI=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -28,13 +28,65 @@
 		<data>
 		/CUoTuPQqqdexfyOT9lpJhV+2MQ=
 		</data>
+		<key>flutter_assets/images/type_channelgroup.png</key>
+		<data>
+		WHAxf0zEXqTysy1ETu2WWhfbnmo=
+		</data>
+		<key>flutter_assets/images/type_channelgs.png</key>
+		<data>
+		hdP4NkhY2zuWbRu3Sw/B8c+x0C8=
+		</data>
+		<key>flutter_assets/images/type_channelplane.png</key>
+		<data>
+		w204tqT6JJPpuhrmPogdrmwXnp4=
+		</data>
+		<key>flutter_assets/images/type_channeltrain.png</key>
+		<data>
+		f5hVdDTRqKueOaPhtPTk2CIVK/Y=
+		</data>
+		<key>flutter_assets/images/type_cruise.png</key>
+		<data>
+		Hg2QoMHgJtmrec31jQX/EEj0Vvw=
+		</data>
+		<key>flutter_assets/images/type_district.png</key>
+		<data>
+		fgX7/U+vtVv9Cp2yi5x3X9Fefeg=
+		</data>
+		<key>flutter_assets/images/type_food.png</key>
+		<data>
+		1oNj8PIzcaQQ7c0A3E1aNURgc3Q=
+		</data>
+		<key>flutter_assets/images/type_hotel.png</key>
+		<data>
+		Y+bH5186D4TZApB/aJqrloNqdu8=
+		</data>
+		<key>flutter_assets/images/type_huodong.png</key>
+		<data>
+		ZUbHiJhi9SWsLEKk3HTeXUW9fJA=
+		</data>
+		<key>flutter_assets/images/type_shop.png</key>
+		<data>
+		Qhn9BX1UxgKaCvhmpv8avGt9H4g=
+		</data>
+		<key>flutter_assets/images/type_sight.png</key>
+		<data>
+		fmMnUOg+N2eI9GluyxPNHj0Cavc=
+		</data>
+		<key>flutter_assets/images/type_ticket.png</key>
+		<data>
+		l1xfpSQITBFzLWVs9+4r+8k87Do=
+		</data>
+		<key>flutter_assets/images/type_travelgroup.png</key>
+		<data>
+		JA1i4vB4HA1180IcMCQnOuQIs6c=
+		</data>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<data>
 		S90F96DOcjLIn5UKd+T/U+yl2yg=
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		AzFZJg3tPJOsK//F8an02k1Pj6s=
+		mtHSctOFgdIoAwM0lI0RRAvfuKo=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -55,14 +107,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nFwFXoxik7nUz3ocXKA7ilNzgyDD8BvjtuMmn6MuJrY=
+			sUWvt0gwKQmXDwSwcVftnDrkaNmTkjjAbDKHg9sOCpA=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sps95+7JukayebvM0TLjL1LW1VXXndpKp/O8tOm9ZR8=
+			ahHkJfmFd+PCTl+CaTR2qJsCLFfi+jvMtGdMotwxBr0=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -86,6 +138,97 @@
 			2YZbZxoJ1oPROoYwidiCXg9ho3aWzl19RIvIAjqmJFM=
 			</data>
 		</dict>
+		<key>flutter_assets/images/type_channelgroup.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NONL2ZBR0zkHh6JJSgllPE4vUdP4kjlg3CXVUOOr1Lo=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_channelgs.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gQXuTVPHObIOWymx1GhJnThvSkrHbaqKx5QZqbeLkNY=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_channelplane.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			04LyuG37zuakeQRn+n8RkWLMg5MqWw1l1zWh5lA0dAg=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_channeltrain.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rYBWq7+NXy9QcwK3ALFSEd1L/s4katDDgmU44qn0Yx4=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_cruise.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qmZiLU45TRDYxx8Xt11J+dVrh6t1Up2A4SO6PlQD+XA=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_district.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/8O1DzmRt/vVNsXjbhbGsknh/D7D2oP/xJuFyJXn/K8=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_food.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XaWe9Famcb+2aIQPzfOdiA2BA4892nW2SoF+1TtiDK4=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_hotel.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			r2woK4bAgiU9SlF/YLK3J9lxoiO5gZVHAate9NlksDM=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_huodong.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			AL8wAbjRcdiCtDnjmJWKITzDeU24Ej6PKPHtnW23oi8=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_shop.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Z+0u+HugP8I7J0qIcfRN+8oSCPZDszCVjEUhN1BF7wA=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_sight.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9yEMWNXfiJecKlIQY1Q5ufJH9jLSrme1nPuB/wbZONY=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_ticket.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UwddoZ99KpNic2n7ePNcXR1KMlX7T6diZcsa3Yd7FRQ=
+			</data>
+		</dict>
+		<key>flutter_assets/images/type_travelgroup.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LHshmVbt9BizEKJo7FJP+QSn1wY0g9+x6E+shkKTqRw=
+			</data>
+		</dict>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<dict>
 			<key>hash2</key>
@@ -97,7 +240,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yKR9dE+3vSrAQ/XJ4+oo51/UU/91ZjyNy818hj4rGRU=
+			ILoCd7msGHQ3sPQ/QOl+UUofHuD8JjkZJsGT+DQeTqA=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

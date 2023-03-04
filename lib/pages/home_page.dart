@@ -6,6 +6,7 @@ import 'package:flutter_ctrip_project/dao/home_dart.dart';
 import 'package:flutter_ctrip_project/model/grid_nav_model.dart';
 import 'package:flutter_ctrip_project/model/home_model.dart';
 import 'package:flutter_ctrip_project/model/sales_box_model.dart';
+import 'package:flutter_ctrip_project/pages/search_page.dart';
 import 'package:flutter_ctrip_project/widget/grid_nav.dart';
 import 'package:flutter_ctrip_project/widget/loading_container.dart';
 import 'package:flutter_ctrip_project/widget/local_nav.dart';
@@ -98,15 +99,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   _jumpToSearch() {
-
-
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context){
+      return const SearchPage(hint: SEARCH_BAR_DEFAULT_TEXT,);
+    }));
   }
 
   _jumpToSpeak() {
 
-
   }
-
 
   @override
   Widget build(BuildContext context) {

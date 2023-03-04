@@ -1,48 +1,234 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ctrip_project/dao/search_dao.dart';
 import 'package:flutter_ctrip_project/widget/search_bar.dart';
 
+import '../model/seach_model.dart';
+import '../widget/webview.dart';
+const URL =
+    'https://m.ctrip.com/restapi/h5api/searchapp/search?source=mobileweb&action=autocomplete&contentType=json&keyword=';
+const TYPES = [
+  'channelgroup',
+  'gs',
+  'plane',
+  'train',
+  'cruise',
+  'district',
+  'food',
+  'hotel',
+  'huodong',
+  'shop',
+  'sight',
+  'ticket',
+  'travelgroup'
+];
+
 class SearchPage extends StatefulWidget {
+  final bool hideLeft;
+  final String? searchUrl;
+  final String? keyword;
+  final String? hint;
+
+  const SearchPage({Key?key, this.hideLeft = false, this.searchUrl = URL, this.keyword='', this.hint = '请输入关键字'}):super(key: key);
 
   @override
   _SearchPageState createState()  => _SearchPageState();
-
 }
 
 class _SearchPageState extends State<SearchPage>{
-
+  SearchModel? searchModel;
+  String? keyword;
   final PageController _controller = PageController(
     initialPage: 0,
   );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(widget.keyword != null){
+      _onTextChange(widget.keyword!);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue,title: Text('搜索',style: TextStyle(fontSize: 18,color: Colors.white),),),
       body: Column(
         children: [
-          SearchBar(
-            hideLeft: true,
-            defaultText: '哈哈',
-            hint: '123',
-            leftButtonClick: (){
-
-            },
-            rightButtonClick: (){
-
-            },
-            speakClick: (){
-
-            },
-            onChanged: _onTextChange(),
-          ),
-          // Text('11')
+          _appBar(),
+         // MediaQuery.removePadding(context: context,
+         //   removeTop: true,
+         //   child:  ListView.builder(
+         //     itemCount: searchModel?.data?.length ?? 0,
+         //     itemBuilder: (BuildContext context, int position){
+         //       return _item(position);
+         //     }),)
         ],
       )
     );
   }
 
-  _onTextChange(){
+  _item(int position){
+    if(searchModel == null || searchModel?.data == null) return Container(width: 0,height: 0,);
+    SearchItem item = searchModel!.data![position];
+    return GestureDetector(
+      onTap: () {
+        // Navigator.push(
+        //     context,
+        //     WebView(
+        //       url: item.url,
+        //       title: '详情',
+        //     ));
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 0.3, color: Colors.grey))),
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(1),
+              child: Image(
+                  height: 26,
+                  width: 26,
+                  image: AssetImage(_typeImage(item.type!))),
+            ),
+            Column(
+                children: <Widget>[
+                Container(
+                  width: 300,
+                  child: _title(item),
+                ),
+                Container(
+                    width: 300,
+                    margin: EdgeInsets.only(top: 5),
+                    child: _subTitle(item))
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  _title(SearchItem item) {
+    if (item == null) {
+      return null;
+    }
+    List<TextSpan> spans = [];
+    spans.addAll(_keywordTextSpans(item.word!, searchModel!.keyword!));
+    spans.add(TextSpan(
+        text: ' ' + (item.districtname ?? '') + ' ' + (item.zonename ?? ''),
+        style: TextStyle(fontSize: 16, color: Colors.grey)));
+    return RichText(text: TextSpan(children: spans));
+  }
+
+  _keywordTextSpans(String word, String keyword) {
+    List<TextSpan> spans = [];
+    if (word == null || word.length == 0) return spans;
+    //搜索关键字高亮忽略大小写
+    String wordL = word.toLowerCase(), keywordL = keyword.toLowerCase();
+    List<String> arr = wordL.split(keywordL);
+    TextStyle normalStyle = TextStyle(fontSize: 16, color: Colors.black87);
+    TextStyle keywordStyle = TextStyle(fontSize: 16, color: Colors.orange);
+    //'wordwoc'.split('w') -> [, ord, oc] @https://www.tutorialspoint.com/tpcg.php?p=wcpcUA
+    int preIndex = 0;
+    for (int i = 0; i < arr.length; i++) {
+      if ((i + 1) % 2 == 0) {
+        //搜索关键字高亮忽略大小写
+        preIndex = wordL.indexOf(keywordL, preIndex);
+        spans.add(TextSpan(
+            text: word.substring(preIndex, preIndex + 1), style: keywordStyle));
+      }
+      String val = arr[i];
+      if (val != null && val.length > 0) {
+        spans.add(TextSpan(text: val, style: normalStyle));
+      }
+    }
+    return spans;
+  }
+
+  _subTitle(SearchItem item) {
+    return RichText(
+      text: TextSpan(children: <TextSpan>[
+        TextSpan(
+          text: item.price ?? '',
+          style: TextStyle(fontSize: 16, color: Colors.orange),
+        ),
+        TextSpan(
+          text: ' ' + (item.star ?? ''),
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        )
+      ]),
+    );
+  }
+
+  _typeImage(String type) {
+    if (type == null) return 'images/type_travelgroup.png';
+    String path = 'travelgroup';
+    for (final val in TYPES) {
+      if (type.contains(val)) {
+        path = val;
+        break;
+      }
+    }
+    return 'images/type_$path.png';
+  }
+
+  _appBar () {
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              //AppBar渐变遮罩背景
+              colors: [Color(0x66000000), Colors.transparent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Container(
+              padding: EdgeInsets.only(top: 20),
+              height: 80,
+              decoration: BoxDecoration(color: Colors.white),
+              child: SearchBar(
+                hideLeft: widget.hideLeft!,
+                defaultText: widget.keyword!,
+                hint: widget.hint!,
+                speakClick: _jumpToSpeak,
+                leftButtonClick: () {
+                  Navigator.pop(context);
+                },
+                rightButtonClick: () {
+                },
+                onChanged: _onTextChange,
+              )),
+        )
+      ],
+    );
+  }
+  _onTextChange(String text) {
+    keyword = text;
+    if (text.length == 0) {
+      setState(() {
+        searchModel = null;
+      });
+      return;
+    }
+    String url = widget.searchUrl! + text;
+    SearchDao.fetch(url, text).then((SearchModel model) {
+      //只有当当前输入的内容和服务端返回的内容一致时才渲染
+      if (model.keyword == keyword) {
+        setState(() {
+          searchModel = model;
+        });
+      }
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _jumpToSpeak() {
 
   }
 }

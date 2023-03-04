@@ -108,6 +108,7 @@ class _SearchBarState extends State<SearchBar> {
       widget.onChanged!(text);
     }
   }
+
   _genHomeSearch(){
     return Container(
       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
@@ -148,6 +149,7 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   _inputBox() {
+    // _controller.tex
     Color inputBoxColor;
     if (widget.searchBarType == SearchBarType.home) {
       inputBoxColor = Colors.white;
@@ -225,5 +227,4 @@ class _SearchBarState extends State<SearchBar> {
         ? Colors.black54
         : Colors.white;
   }
-  
 }
