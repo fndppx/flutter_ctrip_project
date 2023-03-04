@@ -11,10 +11,10 @@ class LoadingContainer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return !cover?!isLoading?child:_loadingView:Stack(
-      children: [
-          child,
-        isLoading?_loadingView:null
+    return !cover?!isLoading?child!:_loadingView:Stack(
+      children: <Widget>[
+          child!,
+          isLoading?_loadingView:Container(width: 0,height: 0,)
       ],
     );
   }
@@ -23,5 +23,4 @@ class LoadingContainer extends StatelessWidget{
       child: CircularProgressIndicator(),
     );
   }
-
 }
