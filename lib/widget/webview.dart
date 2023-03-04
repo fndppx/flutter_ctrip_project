@@ -3,16 +3,17 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+const CATCH_URLS = ['m.ctrip.com/', 'm.ctrip.com/html5/', 'm.ctrip.com/html5'];
 
 class WebView extends StatefulWidget{
-  String url;
-  final String statusBarColor;
-  final String title;
-  final bool hideAppBar;
+  final String? url;
+  final String? statusBarColor;
+  final String? title;
+  final bool? hideAppBar;
   final bool backForbid;
 
-  WebView(this.url, this.statusBarColor, this.title, this.hideAppBar,
-      this.backForbid);
+  WebView({this.url, this.statusBarColor, this.title, this.hideAppBar,
+    this.backForbid = false});
 
   @override
   _WebViewState createState() => _WebViewState();
@@ -24,28 +25,27 @@ class _WebViewState extends State<WebView>{
   late StreamSubscription<String> _onUrlChanged;
   late StreamSubscription<WebViewStateChanged> _onStateChanged;
   late StreamSubscription<WebViewHttpError> _onHttpError;
+  bool exiting = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     webviewReference.close();
-    _onUrlChanged =webviewReference.onUrlChanged.listen((String url) {
+    _onUrlChanged = webviewReference.onUrlChanged.listen((String url) {
 
     });
     _onStateChanged = webviewReference.onStateChanged.listen((WebViewStateChanged state) {
       switch(state.type) {
         case WebViewState.shouldStart:
-          // TODO: Handle this case.
-          break;
-        case WebViewState.startLoad:
-          // TODO: Handle this case.
-          break;
-        case WebViewState.finishLoad:
-          // TODO: Handle this case.
-          break;
-        case WebViewState.abortLoad:
-          // TODO: Handle this case.
+            if(_isToMain(state.url)){
+              if(widget.backForbid!){
+                webviewReference.launch(widget.url!);
+              }else{
+                Navigator.pop(context);
+                exiting = true;
+              }
+            }
           break;
         default:
           break;
@@ -57,14 +57,27 @@ class _WebViewState extends State<WebView>{
     });
   }
 
+  bool _isToMain(String url){
+    bool contain = false;
+    for(final value in CATCH_URLS){
+      if(url?.endsWith(value)??false){
+        contain = true;
+        break;
+      }
+    }
+
+    return contain;
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
+    // super.dispose();
     _onUrlChanged.cancel();
     _onStateChanged.cancel();
     _onHttpError.cancel();
     webviewReference.dispose();
+    super.dispose();
   }
 
   @override
@@ -82,10 +95,10 @@ class _WebViewState extends State<WebView>{
       body: Column(
         children: [
           _appBar(Color(int.parse('0xff' + statusBarColorStr)), backButtonColor),
-          Expanded(child: WebviewScaffold(url: widget.url,
+          Expanded(child: WebviewScaffold(url: widget.url!,
           withZoom: true,
             withLocalStorage: true,
-            hidden: true,
+            hidden: false,
             initialChild: Container(
               color: Colors.white,
               child: Center(
@@ -99,20 +112,25 @@ class _WebViewState extends State<WebView>{
   }
 
   _appBar(Color backgroundColor, Color backButtonColor){
-    if(widget.hideAppBar??false){
+    if (widget.hideAppBar ?? false) {
       return Container(
         color: backgroundColor,
-        height: 30,
+        height: 45,
       );
     }
     return Container(
+      color: backgroundColor,
+      padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Stack(
-          children: [
+          children: <Widget>[
             GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
               child: Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(left: 20),
                 child: Icon(
                   Icons.close,
                   color: backButtonColor,
@@ -121,17 +139,18 @@ class _WebViewState extends State<WebView>{
               ),
             ),
             Positioned(
+              left: 0,
+              right: 0,
               child: Center(
-              child: Text(
-                widget.title??'',
-                style: TextStyle(color: backButtonColor,fontSize: 20),
+                child: Text(
+                  widget.title ?? '',
+                  style: TextStyle(color: backButtonColor, fontSize: 20),
+                ),
               ),
-            ),
-            left: 0,
-              right: 0,)
+            )
           ],
         ),
       ),
-    )
+    );
   }
 }

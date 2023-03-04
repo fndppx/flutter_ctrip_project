@@ -1,11 +1,11 @@
 import 'package:flutter_ctrip_project/model/common_model.dart';
 
 class GridNavModel {
-  final GridNavItem? hotel;
-  final GridNavItem? flight;
-  final GridNavItem? travel;
+  final GridNavItem hotel;
+  final GridNavItem flight;
+  final GridNavItem travel;
 
-  GridNavModel({ this.hotel, this.flight, this.travel});
+  GridNavModel({required this.hotel, required this.flight,required this.travel});
 
   factory GridNavModel.fromJson(Map<String,dynamic>json){
     return GridNavModel(
