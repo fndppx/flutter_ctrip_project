@@ -24,12 +24,13 @@ class _TabNavigatorState extends State<TabNavigator>{
 
     return Scaffold(
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _controller,
         children: <Widget>[
           HomePage(),
           SearchPage(),
-          MyPage(),
-          TravelPage()
+          TravelPage(),
+          MyPage()
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
