@@ -1,2 +1,4 @@
 # flutter_ctrip_project
-flutter 练手项目
+flutter example project:
+Waterfall flow, list, search
+#

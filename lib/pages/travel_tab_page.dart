@@ -134,7 +134,7 @@ class _TravelItem extends StatelessWidget{
         if (item?.article?.urls != null && item!.article!.urls!.length! > 0) {
           Navigator.push(
               context,MaterialPageRoute(builder: (context)=>WebView(
-            url: item!.article!.urls![0].h5Url,title: '详情',))
+            url: item!.article!.urls![2].h5Url!,title: '详情',))
           );
         }
       },
